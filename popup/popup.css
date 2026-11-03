@@ -1,1 +1,134 @@
 
+:root {
+    --bg: #ffffff;
+    --bg-soft: #f6f7f9;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #4338ca;
+    --accent-hover: #3730a3;
+    --safe: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --unknown: #6b7280;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    width: 400px;
+    margin: 0;
+    font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.header {
+    background: linear-gradient(135deg, #1e293b, #4338ca);
+    color: #fff;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.header h1 { font-size: 15px; margin: 0; font-weight: 700; flex: 1; }
+
+.tabs { display: flex; gap: 2px; background: rgba(255,255,255,.12); border-radius: 8px; padding: 2px; }
+.tab {
+    background: transparent; color: #e0e7ff; border: 0; border-radius: 6px;
+    padding: 4px 12px; font: inherit; font-size: 12px; cursor: pointer;
+}
+.tab.active { background: rgba(255,255,255,.25); color: #fff; font-weight: 600; }
+
+.section { padding: 12px 16px; }
+.section + .section { border-top: 1px solid var(--border); }
+.result:empty { display: none; }
+h2 { font-size: 13px; margin: 0 0 8px; font-weight: 600; }
+.hint { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+
+.badge {
+    display: inline-block; padding: 4px 12px; border-radius: 14px;
+    color: #fff; font-weight: 600; font-size: 13px; margin-bottom: 8px;
+}
+.badge.safe { background: var(--safe); }
+.badge.warning { background: var(--warning); }
+.badge.danger { background: var(--danger); }
+.badge.unknown { background: var(--unknown); }
+
+.host { font-size: 15px; font-weight: 600; word-break: break-all; }
+.url { font-size: 11px; color: var(--muted); word-break: break-all; margin-top: 2px; }
+.meta { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+.reasons { list-style: none; margin: 10px 0 0; padding: 0; }
+.reasons li { display: flex; gap: 8px; align-items: flex-start; padding: 5px 0; border-top: 1px solid var(--border); }
+.reasons li:first-child { border-top: 0; }
+.points {
+    flex: none; min-width: 34px; text-align: center; font-size: 11px; font-weight: 700;
+    border-radius: 4px; padding: 1px 4px; background: var(--bg-soft); color: var(--muted);
+}
+.points.hit { background: #fee2e2; color: var(--danger); }
+
+.input-group { display: flex; gap: 6px; }
+input[type="text"] {
+    flex: 1; min-width: 0; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px;
+    font: inherit; font-size: 12px; background: var(--bg); color: var(--text); outline: none;
+}
+input[type="text"]:focus { border-color: var(--accent); }
+
+.btn {
+    border: 1px solid var(--border); background: var(--bg-soft); color: var(--text);
+    padding: 7px 12px; border-radius: 6px; font: inherit; font-size: 12px; font-weight: 500; cursor: pointer;
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--accent-hover); }
+.btn.wide { width: 100%; padding: 9px 12px; font-size: 13px; font-weight: 600; }
+.btn.small { padding: 4px 10px; font-size: 11px; margin-top: 10px; }
+.btn:disabled { opacity: .6; cursor: default; }
+
+#customResult > div { padding-top: 12px; }
+
+.footer {
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    padding: 8px 16px; background: var(--bg-soft); border-top: 1px solid var(--border);
+    font-size: 10.5px; color: var(--muted);
+}
+.footer a { color: var(--accent); }
+.server { font-weight: 600; white-space: nowrap; }
+.server.ok { color: var(--safe); }
+.server.down { color: var(--danger); }
+.server.unknown { color: var(--muted); }
+.muted { color: var(--muted); font-size: 11px; }
+
+.footer { flex-direction: column; align-items: stretch; gap: 2px; }
+.footer-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+
+/* Перемикач «ШІ-аналіз» */
+.switch { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; cursor: pointer; user-select: none; }
+.switch input { accent-color: var(--accent); width: 15px; height: 15px; margin: 0; }
+.switch .muted { margin-left: auto; }
+
+/* Білий / чорний список */
+.segmented { display: flex; gap: 2px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px; padding: 2px; }
+.seg {
+    flex: 1; border: 0; background: transparent; border-radius: 6px; padding: 6px 8px;
+    font: inherit; font-size: 12px; cursor: pointer; color: var(--muted);
+}
+.seg.active { background: var(--bg); color: var(--text); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+.count { display: inline-block; min-width: 18px; padding: 0 5px; border-radius: 9px; background: var(--border); font-size: 10.5px; font-weight: 700; }
+#listForm { margin-top: 8px; }
+.list-error { color: var(--danger); font-size: 12px; margin-top: 6px; }
+.list-items { list-style: none; margin: 8px 0 0; padding: 0; max-height: 170px; overflow-y: auto; }
+.list-items li {
+    display: flex; align-items: center; gap: 8px; padding: 5px 4px; border-top: 1px solid var(--border);
+    font-size: 12.5px; word-break: break-all;
+}
+.list-items li:first-child { border-top: 0; }
+.list-items li span { flex: 1; }
+.list-items li.empty { color: var(--muted); font-size: 12px; justify-content: center; }
+.remove {
+    flex: none; border: 0; background: transparent; color: var(--muted); font-size: 16px; line-height: 1;
+    cursor: pointer; border-radius: 4px; padding: 2px 6px;
+}
+.remove:hover { background: #fee2e2; color: var(--danger); }
+.site-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn.danger-outline { color: var(--danger); border-color: #fecaca; background: #fff5f5; }
