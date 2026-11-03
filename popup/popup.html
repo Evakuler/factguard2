@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <title>FactGuard</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <header class="header">
+        <img src="../icons/icon32.png" alt="" width="22" height="22">
+        <h1>FactGuard</h1>
+        <nav class="tabs" role="tablist">
+            <button class="tab active" role="tab" data-panel="newsPanel" aria-selected="true">Новина</button>
+            <button class="tab" role="tab" data-panel="sitePanel" aria-selected="false">Сайт</button>
+        </nav>
+    </header>
+
+    <!-- ВКЛАДКА «НОВИНА»: джерело + подача + перевірка на інших сайтах + ШІ -->
+    <main id="newsPanel" class="panel">
+        <section class="section">
+            <button id="scanBtn" class="btn primary wide">Перевірити новину на цій сторінці</button>
+            <label class="switch" title="ШІ читає статті інших сайтів і робить висновок. Потрібен ключ ШІ на сервері.">
+                <input type="checkbox" id="aiToggle" checked>
+                <span>🤖 ШІ-аналіз новини</span>
+                <span id="aiState" class="muted"></span>
+            </label>
+            <p class="hint">
+                Або виділіть речення на сторінці → права кнопка миші → «Перевірити новину на фактчекінг».
+            </p>
+        </section>
+        <section id="newsResult" class="section result"></section>
+    </main>
+
+    <!-- ВКЛАДКА «САЙТ»: перевірка на фішинг + білий і чорний списки -->
+    <main id="sitePanel" class="panel" hidden>
+        <section class="section" id="currentResult">
+            <div class="badge unknown">Перевірка…</div>
+        </section>
+        <section class="section">
+            <h2>Перевірити посилання</h2>
+            <form class="input-group" id="checkForm">
+                <input type="text" id="customUrlInput" placeholder="https://example.com/login" autocomplete="off" spellcheck="false">
+                <button type="submit" class="btn primary">Перевірити</button>
+            </form>
+            <div id="customResult"></div>
+        </section>
+        <section class="section">
+            <h2>Мої списки сайтів</h2>
+            <div class="segmented" role="tablist">
+                <button class="seg active" data-list="trusted" role="tab">✅ Білий список <span id="trustedCount" class="count">0</span></button>
+                <button class="seg" data-list="blocked" role="tab">⛔ Чорний список <span id="blockedCount" class="count">0</span></button>
+            </div>
+            <p class="hint" id="listHint"></p>
+            <form class="input-group" id="listForm">
+                <input type="text" id="listInput" placeholder="example.com" autocomplete="off" spellcheck="false">
+                <button type="submit" class="btn primary">Додати</button>
+            </form>
+            <div id="listError" class="list-error" hidden></div>
+            <ul id="listItems" class="list-items"></ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-row">
+            <span id="serverStatus" class="server unknown">● Сервер…</span>
+            <span id="aiStatus" class="server unknown"></span>
+            <a href="#" id="testsLink">Самоперевірка</a>
+        </div>
+        <div class="footer-row"><span id="status"></span></div>
+    </footer>
+
+    <script src="../src/analyzer.js"></script>
+    <script src="../src/news-analyzer.js"></script>
+    <script src="../src/lists.js"></script>
+    <script src="../src/ui.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
